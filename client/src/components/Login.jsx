@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Login() {
+
+  const [userCredential,setUserCredential]=useState({
+    email:"", 
+    password:''
+  })
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log(userCredential)
+  }
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-400">
-    <form className="bg-white w-1/2  p-8 rounded shadow-md" >
+    <form className="bg-white w-1/2  p-8 rounded shadow-md" onSubmit={(e)=>handleSubmit(e)}>
       <h2 className="text-2xl font-semibold mb-6">Sign In</h2>
       <div className="mb-4">
         <label className="block text-gray-600 font-semibold mb-2" htmlFor="email">
@@ -14,8 +25,8 @@ export default function Login() {
           id="email"
           name="email"
           className="w-full p-2 border rounded focus:outline-none focus:border-blue-400"
-        //   onChange={handleChange}
-        //   value={formData.email}
+          onChange={(e)=>setUserCredential({...userCredential,[e.target.name]:e.target.value})}
+          value={userCredential.email}
           required
         />
       </div>
@@ -28,8 +39,8 @@ export default function Login() {
           id="password"
           name="password"
           className="w-full p-2 border rounded focus:outline-none focus:border-blue-400"
-        //   onChange={handleChange}
-        //   value={formData.password}
+          onChange={(e)=>setUserCredential({...userCredential,[e.target.name]:e.target.value})}
+          value={userCredential.password}
           required
         />
       </div>
