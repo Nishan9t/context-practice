@@ -33,7 +33,7 @@ route.post('/signup',async(req,res)=>{
         await user.save();
 
         //creating token
-        const token = await jwt.sign({id:user._id},"Nishant",{expiresIn:'24h'});
+        const token = await jwt.sign({id:user._id},"nishant",{expiresIn:'24h'});
 
 
         return res.send({data:token,message:'user registered successfully',user:user});
@@ -41,7 +41,7 @@ route.post('/signup',async(req,res)=>{
     }
     catch(error)
     {
-        res.status(500).json({message:"error occured",error:error});
+        res.json({message:"error",error:error});
     }
 
 });

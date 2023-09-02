@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 export default function Signup() {
 
@@ -8,9 +9,19 @@ export default function Signup() {
     password:''
   })
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault();
-    console.log(userCredential)
+    try{
+      const res=await axios.post('http://localhost:8000/signup',{
+        ...userCredential
+      })
+     console.log(res)
+
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
   }
 
 
