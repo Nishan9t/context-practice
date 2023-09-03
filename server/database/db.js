@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const DbConnection =async()=>{
     try{
-        mongoose.connect('mongodb://localhost:27017/contextpractice',{ useNewUrlParser: true, useUnifiedTopology: true });
+        mongoose.connect('mongodb://localhost:27017/contextpractice');
         console.log("db connected");
     }
     catch(error)

@@ -18,13 +18,20 @@ export default function Signup() {
       const res=await axios.post('http://localhost:8000/signup',{
         ...userCredential
       })
-    //  console.log(res)
-     navigate("/login");
+      if(res)
+      {
+        if(!res.errors)
+        {
+          console.log(res);
+          navigate("/login")
+        }
+      }
+     
 
     }
     catch(error)
     {
-      console.log(error.message);
+      console.log(error);
     }
   }
 
@@ -83,9 +90,9 @@ export default function Signup() {
       </button>
       <div className='flex justify-center'>
       <p>Already have an account </p>
-      <Link className="no-underline border-b border-blue ml-4 text-blue-500" href="../login/">
+      <a className="no-underline border-b border-blue ml-4 text-blue-500" href="../login/">
       Log in
-      </Link>
+      </a>
       </div>
     </form>
   </div>

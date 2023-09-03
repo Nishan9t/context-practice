@@ -1,17 +1,36 @@
 import React, { useState } from 'react'
 import Signup from './Signup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
+
+  const navigate=useNavigate();
 
   const [userCredential,setUserCredential]=useState({
     email:"", 
     password:''
   })
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault();
-    console.log(userCredential)
+    try{
+      const res= await axios.post('http://localhost:8000/login',{
+        ...userCredential
+      });
+      if(res.data)
+      {
+      console.log(res);
+      navigate('/')
+
+      }
+      
+
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
   }
 
   return (
@@ -54,9 +73,9 @@ export default function Login() {
       </button>
       <div className='flex justify-center'>
       <p>Don't have an account </p>
-      <Link className="no-underline border-b border-blue ml-4 text-blue-500" to="/signup">
+      <a className="no-underline border-b border-blue ml-4 text-blue-500" href="../signup">
       Signup
-      </Link>
+      </a>
       </div>
     </form>
   </div>
