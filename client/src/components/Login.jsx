@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Signup from './Signup';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
 
@@ -50,6 +52,12 @@ export default function Login() {
       >
         Login
       </button>
+      <div className='flex justify-center'>
+      <p>Don't have an account </p>
+      <Link className="no-underline border-b border-blue ml-4 text-blue-500" to="/signup">
+      Signup
+      </Link>
+      </div>
     </form>
   </div>
   )

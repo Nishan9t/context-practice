@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function Signup() {
+
+  const navigate=useNavigate();
 
   const [userCredential,setUserCredential]=useState({
     name:'',
@@ -15,12 +18,13 @@ export default function Signup() {
       const res=await axios.post('http://localhost:8000/signup',{
         ...userCredential
       })
-     console.log(res)
+    //  console.log(res)
+     navigate("/login");
 
     }
     catch(error)
     {
-      console.log(error);
+      console.log(error.message);
     }
   }
 
@@ -77,6 +81,12 @@ export default function Signup() {
       >
         Sign Up
       </button>
+      <div className='flex justify-center'>
+      <p>Already have an account </p>
+      <Link className="no-underline border-b border-blue ml-4 text-blue-500" href="../login/">
+      Log in
+      </Link>
+      </div>
     </form>
   </div>
   )

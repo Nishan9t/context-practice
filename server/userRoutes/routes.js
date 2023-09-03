@@ -14,14 +14,14 @@ route.post('/signup',async(req,res)=>{
         //check emptiness of req data
         if(!name||!email||!password)
         {
-            return res.status(500).json({message:"please enter all details"});
+            return res.json({message:"please enter all details"});
         }
 
         //check if user already exist or not
         const userExist = await userModel.findOne({email:req.body.email});
         if(userExist)
         {
-            return res.status(500).json({message:"user already exist"});
+            return res.json({message:"user already exist"});
         }
         //hash the password
         const salt = await bcrypt.genSalt(10);
