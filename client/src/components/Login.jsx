@@ -18,9 +18,11 @@ export default function Login() {
       const res= await axios.post('http://localhost:8000/login',{
         ...userCredential
       });
+      
       if(res.data)
       {
       console.log(res);
+      localStorage.setItem("token",res.data.data)
       navigate('/')
 
       }
