@@ -16,11 +16,11 @@ function App() {
       
 
           <Routes>
-            {user && <Route path='/' exact element={<Main/>}/>}
+            {user ? <Route path='/' exact element={<Main/>}/> :  <Route path='/' element={<Navigate replace to="/login" />} /> }
               <Route path='/login' element={<Login/>} />
 
               <Route path='/signup' element={<Signup/>} />
-              <Route path='/' strict element={<Navigate replace to="/login" />} />
+             
           </Routes>
       
     </ContextProvider>

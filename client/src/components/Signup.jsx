@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
+import { DataContext } from '../Context/ContextProvider';
 
 export default function Signup() {
 
   const navigate=useNavigate();
+  const {signinUser}=useContext(DataContext);
 
   const [userCredential,setUserCredential]=useState({
     name:'',
@@ -14,25 +16,8 @@ export default function Signup() {
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
-    try{
-      const res=await axios.post('http://localhost:8000/signup',{
-        ...userCredential
-      })
-      if(res)
-      {
-        if(!res.errors)
-        {
-          console.log(res);
-          navigate("/login")
-        }
-      }
-     
 
-    }
-    catch(error)
-    {
-      console.log(error);
-    }
+    signinUser(userCredential);
   }
 
 

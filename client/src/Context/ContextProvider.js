@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import {createContext, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 export const DataContext=createContext();
@@ -8,6 +8,29 @@ export const DataContext=createContext();
 const ContextProvider=({children})=>{
     const [account,setAccount]=useState();
     const navigate=useNavigate();
+
+
+    const signinUser=async(userCredential)=>{
+        try{
+            const res=await axios.post('http://localhost:8000/signup',{
+              ...userCredential
+            })
+            if(res)
+            {
+              if(!res.errors)
+              {
+                console.log(res);
+                navigate("/login")
+              }
+            }
+           
+      
+          }
+          catch(error)
+          {
+            console.log(error);
+          }
+    }
 
     const loginUser=async(userCredential)=>{
        
@@ -18,15 +41,17 @@ const ContextProvider=({children})=>{
           
           if(res.data)
           {
-          console.log(res);
-          setAccount(res.data.user.name)
-        localStorage.setItem("token",res.data.data)
-       
-          navigate("/")
+            if(!res.errors)
+              {
+                console.log(res);
+                await setAccount(res.data.user.name)
+                await localStorage.setItem("token",res.data.data)
+              
+                navigate("/");
+                
+
+              }
           
-          
-          
-    
           }
           
     
@@ -37,10 +62,14 @@ const ContextProvider=({children})=>{
         }
       }
 
+      
+      
+
     return(
         <DataContext.Provider value={{
             account,
             setAccount,
+            signinUser,
             loginUser
         }}>
             {children}
