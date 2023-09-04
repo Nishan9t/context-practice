@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Signup from './Signup';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { DataContext } from '../Context/ContextProvider';
 
 export default function Login() {
 
   const navigate=useNavigate();
+
+  const {account,setAccount}=useContext(DataContext);
 
   const [userCredential,setUserCredential]=useState({
     email:"", 
@@ -22,8 +25,14 @@ export default function Login() {
       if(res.data)
       {
       console.log(res);
-      localStorage.setItem("token",res.data.data)
-      navigate('/')
+      setAccount({username:res.data.user.name,email:res.data.user.email});
+      console.log(account)
+      if(account.username)
+      {
+        localStorage.setItem("token",res.data.data)
+      window.location='/'
+      }
+      
 
       }
       
