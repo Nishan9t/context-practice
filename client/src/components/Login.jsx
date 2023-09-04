@@ -8,41 +8,19 @@ export default function Login() {
 
   const navigate=useNavigate();
 
-  const {account,setAccount}=useContext(DataContext);
+  const {account,setAccount,loginUser}=useContext(DataContext);
 
   const [userCredential,setUserCredential]=useState({
     email:"", 
     password:''
   })
 
-  const handleSubmit=async(e)=>{
-    e.preventDefault();
-    try{
-      const res= await axios.post('http://localhost:8000/login',{
-        ...userCredential
-      });
-      
-      if(res.data)
-      {
-      console.log(res);
-      setAccount({username:res.data.user.name,email:res.data.user.email});
-      console.log(account)
-      if(account.username)
-      {
-        localStorage.setItem("token",res.data.data)
-      window.location='/'
-      }
-      
-
-      }
-      
-
-    }
-    catch(error)
-    {
-      console.log(error);
-    }
-  }
+ 
+const handleSubmit=(e)=>{
+  e.preventDefault();
+  loginUser(userCredential)
+}
+  
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-400">

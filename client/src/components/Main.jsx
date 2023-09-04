@@ -21,7 +21,8 @@ export default function Main() {
       <div>
       Main
       <br></br>
-      {account.username ? account.username : "nothing"}
+      {account ? account : "nothing"}
+      
       </div>
     
     

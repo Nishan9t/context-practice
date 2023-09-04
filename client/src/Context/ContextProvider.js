@@ -1,15 +1,47 @@
 
+import axios from 'axios';
 import {createContext, useState} from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-export const DataContext=createContext(null);
+export const DataContext=createContext();
 
 const ContextProvider=({children})=>{
-    const [account,setAccount]=useState({username:'',name:''});
+    const [account,setAccount]=useState();
+    const navigate=useNavigate();
+
+    const loginUser=async(userCredential)=>{
+       
+        try{
+          const res= await axios.post('http://localhost:8000/login',{
+            ...userCredential
+          });
+          
+          if(res.data)
+          {
+          console.log(res);
+          setAccount(res.data.user.name)
+        localStorage.setItem("token",res.data.data)
+       
+          navigate("/")
+          
+          
+          
+    
+          }
+          
+    
+        }
+        catch(error)
+        {
+          console.log(error);
+        }
+      }
 
     return(
         <DataContext.Provider value={{
             account,
-            setAccount
+            setAccount,
+            loginUser
         }}>
             {children}
         </DataContext.Provider>
