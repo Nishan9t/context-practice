@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Signup() {
 
   
-  const {signinUser}=useContext(DataContext);
+  const {signUpUser}=useContext(DataContext);
 
   const [userCredential,setUserCredential]=useState({
     name:'',
@@ -17,7 +17,7 @@ export default function Signup() {
   const handleSubmit=async(e)=>{
     e.preventDefault();
 
-    signinUser(userCredential);
+    signUpUser(userCredential);
   }
 
 

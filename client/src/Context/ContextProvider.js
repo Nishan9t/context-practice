@@ -11,7 +11,7 @@ const ContextProvider=({children})=>{
   
 
 
-    const signinUser=async(userCredential)=>{
+    const signUpUser=async(userCredential)=>{
         try{
             const res=await axios.post('http://localhost:8000/signup',{
               ...userCredential
@@ -69,7 +69,7 @@ const ContextProvider=({children})=>{
         <DataContext.Provider value={{
             account,
             setAccount,
-            signinUser,
+            signUpUser,
             loginUser
         }}>
             {children}
