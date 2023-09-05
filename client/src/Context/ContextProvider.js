@@ -47,7 +47,7 @@ const ContextProvider=({children})=>{
                 await setAccount(res.data.user.name)
                 await localStorage.setItem("token",res.data.data)
               
-                navigate("/");
+               navigate("/")
                 
 
               }

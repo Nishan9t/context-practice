@@ -18,11 +18,11 @@ export default function Main() {
       >
         Logout
       </button>
-      <div>
-      Main
-      <br></br>
-      {account ? account : "nothing"}
-      
+      <div className='m-16 border border-2 border-orange-500'>
+    <h1 className='font-bold text-3xl max-w-full text-center my-4 text-green-600'>
+      Hello , {account ? account : "nothing"}
+      </h1>
+      <p className='text-xl max-w-full text-center my-4 text-gray-500'>Thankyou for logging in</p>
       </div>
     
     
