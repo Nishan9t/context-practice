@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react'
-import Signup from './Signup';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 import { DataContext } from '../Context/ContextProvider';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
 
-  const navigate=useNavigate();
 
-  const {account,setAccount,loginUser}=useContext(DataContext);
+
+  const {loginUser}=useContext(DataContext);
 
   const [userCredential,setUserCredential]=useState({
     email:"", 
@@ -62,9 +61,9 @@ const handleSubmit=(e)=>{
       </button>
       <div className='flex justify-center'>
       <p>Don't have an account </p>
-      <a className="no-underline border-b border-blue ml-4 text-blue-500" href="../signup">
+      <Link className="no-underline border-b border-blue ml-4 text-blue-500" to="/signup">
       Signup
-      </a>
+      </Link>
       </div>
     </form>
   </div>

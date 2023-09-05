@@ -1,13 +1,14 @@
 
 import axios from 'axios';
 import {createContext, useEffect, useState} from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 export const DataContext=createContext();
 
 const ContextProvider=({children})=>{
     const [account,setAccount]=useState();
     const navigate=useNavigate();
+  
 
 
     const signinUser=async(userCredential)=>{
@@ -20,7 +21,8 @@ const ContextProvider=({children})=>{
               if(!res.errors)
               {
                 console.log(res);
-                navigate("/login")
+               navigate("/login");
+                
               }
             }
            
@@ -44,16 +46,14 @@ const ContextProvider=({children})=>{
             if(!res.errors)
               {
                 console.log(res);
-                await setAccount(res.data.user.name)
-                await localStorage.setItem("token",res.data.data)
-              
-               navigate("/")
-                
+                 setAccount(res.data.user.name)
+                 localStorage.setItem("token",res.data.data)
 
+                 navigate("/")
               }
-          
+              
           }
-          
+         
     
         }
         catch(error)

@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
-import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
+
 import { DataContext } from '../Context/ContextProvider';
+import { Link } from 'react-router-dom';
 
 export default function Signup() {
 
-  const navigate=useNavigate();
+  
   const {signinUser}=useContext(DataContext);
 
   const [userCredential,setUserCredential]=useState({
@@ -75,9 +75,9 @@ export default function Signup() {
       </button>
       <div className='flex justify-center'>
       <p>Already have an account </p>
-      <a className="no-underline border-b border-blue ml-4 text-blue-500" href="../login/">
+      <Link className="no-underline border-b border-blue ml-4 text-blue-500" to="/login">
       Log in
-      </a>
+      </Link>
       </div>
     </form>
   </div>
